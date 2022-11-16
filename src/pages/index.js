@@ -2,11 +2,13 @@ import Head from "next/head"
 
 export default function Home() {
    return (
-      <div className={styles.container}>
+      <div>
          <Head>
             <title>Amazon 2.0</title>
          </Head>
-         <main className="max-w-screen-2xl mx-auto"></main>
+         <main className="max-w-screen-2xl mx-auto">
+
+         </main>
       </div>
    )
 }
