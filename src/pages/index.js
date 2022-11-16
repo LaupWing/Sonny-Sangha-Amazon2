@@ -1,4 +1,6 @@
 import Head from "next/head"
+import Banner from "../components/Banner"
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 
 export default function Home() {
    return (
@@ -7,7 +9,7 @@ export default function Home() {
             <title>Amazon 2.0</title>
          </Head>
          <main className="max-w-screen-2xl mx-auto">
-
+            <Banner />
          </main>
       </div>
    )
