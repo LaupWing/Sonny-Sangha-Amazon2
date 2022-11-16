@@ -1,8 +1,9 @@
 import Head from "next/head"
 import Banner from "../components/Banner"
 import "react-responsive-carousel/lib/styles/carousel.min.css"
+import ProductFeed from "../components/ProductFeed"
 
-export default function Home() {
+export default function Home({ products }) {
    return (
       <div>
          <Head>
@@ -10,6 +11,7 @@ export default function Home() {
          </Head>
          <main className="max-w-screen-2xl mx-auto">
             <Banner />
+            <ProductFeed products={products} />
          </main>
       </div>
    )
