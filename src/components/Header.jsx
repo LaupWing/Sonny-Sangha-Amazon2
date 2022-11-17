@@ -5,9 +5,12 @@ import {
    ShoppingCartIcon,
    Bars3Icon,
 } from "@heroicons/react/24/outline"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 
 const Header = () => {
+   const { data } = useSession()
+   console.log(data)
+
    return (
       <header>
          <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
@@ -16,7 +19,6 @@ const Header = () => {
                   src="https://links.papareact.com/f90"
                   width={150}
                   height={40}
-                  objectFit={"contain"}
                   className="cursor-pointer"
                />
             </div>
