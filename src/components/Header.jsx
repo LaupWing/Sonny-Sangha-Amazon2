@@ -5,6 +5,7 @@ import {
    ShoppingCartIcon,
    Bars3Icon,
 } from "@heroicons/react/24/outline"
+import { signIn } from "next-auth/react"
 
 const Header = () => {
    return (
@@ -27,7 +28,7 @@ const Header = () => {
                <MagnifyingGlassIcon className="h-12 p-4 " />
             </button>
             <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-               <div className="link">
+               <div className="link" onClick={signIn}>
                   <p>Hello Sonny Sangha</p>
                   <p className="font-extrabold md:text-sm">Account & Lists</p>
                </div>
