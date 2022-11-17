@@ -31,7 +31,9 @@ const Header = () => {
             </button>
             <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
                <div className="link" onClick={signIn}>
-                  <p>Hello Sonny Sangha</p>
+                  <p className="hover:underline">
+                     {data ? }
+                  </p>
                   <p className="font-extrabold md:text-sm">Account & Lists</p>
                </div>
                <div className="link">
