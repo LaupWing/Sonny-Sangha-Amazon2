@@ -5,7 +5,7 @@ import {
    ShoppingCartIcon,
    Bars3Icon,
 } from "@heroicons/react/24/outline"
-import { signIn, useSession } from "next-auth/react"
+import { signIn, signOut, useSession } from "next-auth/react"
 
 const Header = () => {
    const { data } = useSession()
@@ -30,9 +30,9 @@ const Header = () => {
                <MagnifyingGlassIcon className="h-12 p-4 " />
             </button>
             <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-               <div className="link" onClick={signIn}>
+               <div className="link" onClick={!data ? signIn : signOut}>
                   <p className="hover:underline">
-                     {data ? }
+                     {data ? `Hello, ${data.user.name}` : "Sign in"}
                   </p>
                   <p className="font-extrabold md:text-sm">Account & Lists</p>
                </div>
