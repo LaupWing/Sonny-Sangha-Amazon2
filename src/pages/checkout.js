@@ -1,6 +1,7 @@
 import Image from "next/image"
 import React from "react"
 import { useSelector } from "react-redux"
+import CheckoutProduct from "../components/CheckoutProduct"
 import Header from "../components/Header"
 import { selectItems } from "../slices/basketSlice"
 
@@ -27,7 +28,17 @@ const CheckoutPage = () => {
                   </h1>
 
                   {items.map((item, i) => (
-                     <div key={i}>{item.name}</div>
+                     <CheckoutProduct
+                        key={i}
+                        category={item.category}
+                        description={item.description}
+                        hasPrime={item.hasPrime}
+                        id={item.id}
+                        image={item.image}
+                        price={item.price}
+                        rating={item.rating}
+                        title={item.title}
+                     />
                   ))}
                </div>
             </div>
