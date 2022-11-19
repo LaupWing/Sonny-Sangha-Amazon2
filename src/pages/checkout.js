@@ -53,6 +53,7 @@ const CheckoutPage = () => {
                         <span className="font-bold">$ {total}</span>
                      </h2>
                      <button
+                        role={"link"}
                         className={`button mt-2 ${
                            !session &&
                            "from-gray-300 to-gray-500 cursor-not-allowed border-gray-200 text-gray-300"
