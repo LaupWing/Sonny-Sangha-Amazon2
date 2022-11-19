@@ -40,7 +40,7 @@ const CheckoutProduct = ({
          image,
          hasPrime,
       }
-      dispatch(removeFromBasket(product))
+      dispatch(removeFromBasket({ id }))
    }
    return (
       <div className="grid grid-cols-5">
