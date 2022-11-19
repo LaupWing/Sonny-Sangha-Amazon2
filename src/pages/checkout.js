@@ -4,11 +4,12 @@ import React from "react"
 import { useSelector } from "react-redux"
 import CheckoutProduct from "../components/CheckoutProduct"
 import Header from "../components/Header"
-import { selectItems } from "../slices/basketSlice"
+import { selectItems, selectTotal } from "../slices/basketSlice"
 
 const CheckoutPage = () => {
    const items = useSelector(selectItems)
    const { data: session } = useSession()
+   const total = useSelector(selectTotal)
 
    return (
       <div className="bg-gray-100">
@@ -48,8 +49,8 @@ const CheckoutPage = () => {
                {items.length > 0 && (
                   <>
                      <h2 className="whitespace-nowrap">
-                        Subtotal ({items.length} items) :
-                        <span className="font-bold">{/* $ {} */}</span>
+                        Subtotal ({items.length} items) :{" "}
+                        <span className="font-bold">$ {total}</span>
                      </h2>
                      <button
                         className={`button mt-2 ${
