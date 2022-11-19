@@ -11,6 +11,8 @@ const CheckoutPage = () => {
    const { data: session } = useSession()
    const total = useSelector(selectTotal)
 
+   const createCheckoutSession = () => {}
+
    return (
       <div className="bg-gray-100">
          <Header />
@@ -54,6 +56,7 @@ const CheckoutPage = () => {
                      </h2>
                      <button
                         role={"link"}
+                        onClick={createCheckoutSession}
                         className={`button mt-2 ${
                            !session &&
                            "from-gray-300 to-gray-500 cursor-not-allowed border-gray-200 text-gray-300"
