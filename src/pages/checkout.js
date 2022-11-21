@@ -1,3 +1,5 @@
+import { loadStripe } from "@stripe/stripe-js"
+import axios from "axios"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import React from "react"
@@ -5,13 +7,20 @@ import { useSelector } from "react-redux"
 import CheckoutProduct from "../components/CheckoutProduct"
 import Header from "../components/Header"
 import { selectItems, selectTotal } from "../slices/basketSlice"
+const stripePromise = loadStripe(process.env.stripe_public_key)
 
 const CheckoutPage = () => {
    const items = useSelector(selectItems)
    const { data: session } = useSession()
    const total = useSelector(selectTotal)
 
-   const createCheckoutSession = () => {}
+   const createCheckoutSession = async () => {
+      const stripe = await stripePromise
+      const checkoutSession = await axios.post("/api/create-checkout-session", {
+         items,
+         email: session.user.email,
+      })
+   }
 
    return (
       <div className="bg-gray-100">
