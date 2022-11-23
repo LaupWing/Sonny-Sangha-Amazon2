@@ -1,3 +1,4 @@
+import moment from "moment/moment"
 import { getSession, useSession } from "next-auth/react"
 import React from "react"
 import db from "../../firebase"
@@ -46,6 +47,13 @@ export async function getServerSideProps(context) {
       stripeOrders.docs.map(async order =>({
          id: order.id,
          ...order.data(),
+         timestamp: moment(order.data().timestamp.toDate()).unix(),
+         items: (
+            await stripe.checkout.sessions.listLineItems(order.id, {
+               limit: 100,
+            })
+         ).data
       }))
    )
+   console.log(orders)
 }

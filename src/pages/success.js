@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import React from "react"
 import Header from "../components/Header"
 
-const succes = () => {
+const SuccessPage = () => {
    const router = useRouter()
 
    return (
@@ -35,4 +35,4 @@ const succes = () => {
    )
 }
 
-export default succes
+export default SuccessPage
