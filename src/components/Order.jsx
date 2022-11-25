@@ -25,8 +25,16 @@ const Order = ({
             </p>
             <p className="absolute top-2 right-2 w-40 truncate lg:w-72 text-xs whitespace-nowrap">ORDER # {id}</p>
          </div>
-         <div>
-            
+         <div className="p-5 sm:p-10">
+            <div className="flex space-x-6 overflow-x-auto">
+               {images.map(img=>(
+                  <img  
+                     src={img} 
+                     className="h-20 object-contain sm:h-32"
+                     alt="Order items" 
+                  />
+               ))}
+            </div>
          </div>
       </div>
    )
