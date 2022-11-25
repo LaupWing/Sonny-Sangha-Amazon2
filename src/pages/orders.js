@@ -37,16 +37,13 @@ export async function getServerSideProps(context) {
          props: {},
       }
    }
-   console.log(session)
-   return {
-      props: {},
-   }
-   // const stripeOrders = await db
-   //    .collection("users")
-   //    .doc(session.user.email)
-   //    .collection("orders")
-   //    .orderBy("timestamp")
-   //    .get()
+   const stripeOrders = await db
+      .collection("users")
+      .doc(session.user.email)
+      .collection("orders")
+      .orderBy("timestamp")
+      .get()
+   console.log(stripeOrders)
    // const orders = await Promise.all(
    //    stripeOrders.docs.map(async order =>({
    //       id: order.id,
