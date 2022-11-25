@@ -1,5 +1,5 @@
 import "../styles/globals.css"
-import { SessionProvider } from "next-auth/react"
+import { getSession, SessionProvider } from "next-auth/react"
 import { Provider } from "react-redux"
 import { store } from "../app/store"
 
@@ -14,3 +14,13 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+
+export async function getServerSideProps() {
+   // const session = await getSession(context)
+
+   return {
+      props: {
+         // session
+      },
+   }
+}
