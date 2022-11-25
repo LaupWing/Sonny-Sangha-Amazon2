@@ -4,11 +4,11 @@ import React from "react"
 import db from "../../firebase"
 import Header from "../components/Header"
 import { collection, getDocs, orderBy, query } from "firebase/firestore"
+import Order from "../components/Order"
 
 const OrdersPage = ({ orders }) => {
    const {data: session} = useSession()
-   console.log(useSession())
-   console.log(orders)
+   
    return (
       <div>
          <Header />
@@ -17,12 +17,16 @@ const OrdersPage = ({ orders }) => {
                Your Orders
             </h1>
             {session ? (
-               <h2>x Ordsers</h2>
+               <h2>{orders.length} Ordsers</h2>
             ) : (
                <h2>Please sign in to see your orders</h2>
             )}
 
-            <div className="mt-5 space-y-4"></div>
+            <div className="mt-5 space-y-4">
+               {orders?.map(order =>(
+                  <Order {...order}/>
+               ))}
+            </div>
          </main>
       </div>
    )
