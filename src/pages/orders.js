@@ -3,11 +3,12 @@ import { getSession, useSession } from "next-auth/react"
 import React from "react"
 import db from "../../firebase"
 import Header from "../components/Header"
-import {getApps} from "firebase/app"
+import { collection, getDocs, orderBy, query } from "firebase/firestore"
 
 const OrdersPage = ({ orders }) => {
-   // const [session] = useSession()
-   console.log(getApps())
+   const {data: session} = useSession()
+   console.log(useSession())
+   console.log(orders)
    return (
       <div>
          <Header />
@@ -15,11 +16,11 @@ const OrdersPage = ({ orders }) => {
             <h1 className="text-3xl border-b mb-2 pb-1 border-yellow-400">
                Your Orders
             </h1>
-            {/* {session ? (
+            {session ? (
                <h2>x Ordsers</h2>
             ) : (
                <h2>Please sign in to see your orders</h2>
-            )} */}
+            )}
 
             <div className="mt-5 space-y-4"></div>
          </main>
@@ -37,24 +38,31 @@ export async function getServerSideProps(context) {
          props: {},
       }
    }
-   const stripeOrders = await db
-      .collection("users")
-      .doc(session.user.email)
-      .collection("orders")
-      .orderBy("timestamp")
-      .get()
-   console.log(stripeOrders)
-   // const orders = await Promise.all(
-   //    stripeOrders.docs.map(async order =>({
-   //       id: order.id,
-   //       ...order.data(),
-   //       timestamp: moment(order.data().timestamp.toDate()).unix(),
-   //       items: (
-   //          await stripe.checkout.sessions.listLineItems(order.id, {
-   //             limit: 100,
-   //          })
-   //       ).data
-   //    }))
-   // )
-   // console.log(orders)
+   const ref = query(
+      collection(
+         db, 
+         "users",
+         session.user.email,
+         "orders"
+      ),
+      orderBy("timestamp")
+   )
+   const stripeOrders = await getDocs(ref)
+   const orders = await Promise.all(
+      stripeOrders.docs.map(async order =>({
+         id: order.id,
+         ...order.data(),
+         timestamp: moment(order.data().timestamp.toDate()).unix(),
+         items: (
+            await stripe.checkout.sessions.listLineItems(order.id, {
+               limit: 100,
+            })
+         ).data
+      }))
+   )
+   return {
+      props:{
+         orders
+      }
+   }
 }
